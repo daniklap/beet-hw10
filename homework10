@@ -1,0 +1,483 @@
+#10 Homework for Lesson 10 for Monday 12 Feb 2024 by Daniel Clapa
+
+Level 1:
+
+1. The speed control system has the following characteristics:
+- at a speed of 50 km/h or less — the system does not respond
+- at a speed of more than 50 but less than 55 km/h — the system issues a warning
+- at a speed of more than 55, but less than 60 km/h — the system will issue a fine
+- at a speed of more than 60 km/h — the driver will receive a fine and a penalty point in
+the driver's license
+
+Equivalence classes with their boundary values: 0 — 50 — 55 — 60 — 61+
+Boundary values: 50|51 — 55|56 — 60|61+
+
+The speed in the system is measured in integer values. Which of the test data sets can be
+used to test all the boundary values of the equivalence classes?
+
+A. 0, 49, 50, 54, 59, 60
+B. 50, 55, 60
+C. 49, 50, 54, 55, 60, 62
+D. 50, 51, 55, 56, 60, 61	← my answer. Correct! (see below)
+
+2. A fitness app counts the number of steps and sends messages to encourage the users to
+move. Depending on the number of steps, the feedback will be as follows:
+
+- up to 1000 inclusive – “Couch potato”
+- from 1000 to 2000 inclusive – “Bit lazy, huh”
+- from 2000 to 4000 inclusive – “Keep moving!”
+- from 4000 to 6000 inclusive – “Nice!”
+- over 6000 – “Amazing job!”
+
+Equivalence classes: 1000|1001 — 2000|2001 — 4000|4001 — 6000|6001+
+
+Which test data set will provide the best coverage of equivalence classes?
+A. 0, 1000, 2000, 3000, 4000 
+B. 1000, 2001, 4000, 4001, 6000  
+C. 123, 2345, 3456, 4567, 5678 
+D. 666, 999, 2222, 5555, 6666 	← my answer. Correct! (see below)
+
+Analysis using table
+Test data / options
+EP’s covered
+Number of EP’s covered
+A. 0, 1000, 2000, 3000, 4000
+1st, 1st, 2nd, 3rd, 3rd. 
+3
+B. 1000, 2001, 4000, 4001, 6000
+1st, 3rd, 3rd, 4th, 4th.
+3
+C. 123, 2345, 3456, 4567, 5678
+1st, 3rd, 3rd, 4th, 4th. 
+3
+D. 666, 999, 2222, 5555, 6666
+1st, 1st, 3rd, 4th, 5th
+4
+
+
+Instructor response: “Level 1: The correct answer for both tasks is D. Very well defended here with examples.” 
+
+Level 2:
+
+1. Complete the tasks of the previous level.
+
+2. A device that measures the time and intensity of sunlight received by a plant counts a
+combination of parameters: time in the sun (less than 3 hours, 3 to 6 hours, and more than 6
+hours) and light intensity (very low, low, medium, high).
+
+There is the following set of tests:
+
+
+
+Hours
+Intensity
+Index of exposure
+Test 1
+1,5
+very low
+10
+Test 2
+7
+medium
+60
+Test 3
+0,5
+very low
+10
+
+
+What is the minimum number of additional test cases required to ensure that all valid equivalence classes are covered?
+
+A. 1
+B. 2	← Correct. See below. 
+C. 3	← my answer. Incorrect. 
+D. 4
+
+1 more test case for “time in the sun” for the equivalence class “3 to 6 hours”, which is missing from the above set of tests.
+2 more test cases, one for the “low” and another one for the “high” light intensities.  
+
+Instructor response: “Level 2: For Task 1: The correct answer here is B. You are correct about the missing scenarios but they can be combined in 2 more scenarios.”
+
+2. The video playback application has requirements. The application will work on devices
+with this resolution:
+
+1. 640x480
+2. 1280x720
+3. 1600x1200
+4. 1920x1080
+
+What test case is the result of applying the equivalence partitioning technique? Support
+your answer.
+
+A. Check that the application plays video on a 1920x1080 display (1 test case)
+B. Check that the application plays video on 640x480 and 1920x1080 displays (2 test
+cases)		← my answer. 
+C. Check that the application plays video on displays of all sizes specified in the
+requirements (4 test cases)
+D. Check that the application plays video on any display size specified in the
+requirements (1 test case)
+
+The reason just these two test cases would ensure it would work on all these devices is because these two resolutions cover all aspect ratios among these, which is what is important in video playback applications. The table below shows these resolutions’ aspect ratios, which is the result of dividing width by height. Furthermore, these two sizes are the lowest and the highest among these, which should likely ensure those between them would work as well.
+
+Dimensions (width x height)
+Aspect Ratio
+640x480
+4:3
+1280x720
+16:9
+1600x1200
+4:3
+1920x1080
+16:9
+
+
+
+Instructor response: “Task 2: The correct answer is C. Your thoughts here are correct but it turned out that because of the specific nature of the resolution, we have to test each one of them separately, that’s why we need 4 cases.”
+
+
+Level 3:
+
+1. Complete the tasks of the previous two levels.
+
+2. We keep working on a cat photo sharing app.
+
+Write requirements for the app that would regulate the minimum and maximum size of
+photos the users can upload to the system. Also, mention the following parameters:
+minimum length of comments under photos, maximum length of comments under photos
+(the more parameters you come up with, the better).
+
+R1. Allow only file sizes of less than 400 MB. 
+Valid equivalence partition: 1 MB to 400 MB. Invalid: 0 MB; 401 MB.
+R2. Allow only these commonly used aspect ratios: 1:1, 3:2, 4:3, and 5:4. 
+Invalid: all other aspect ratios.
+R3. Allow only color depth images having 1-bit, 8-bit or 24-bit.
+R4. Allow only one of these image file types to be used: .png, .jpeg, and .gif. 
+	Invalid: all other image file types such as .tif, .svg.
+R5. Allow a minimum number of 2 characters in the comments under each photo. 
+R6. Allow a maximum number of 50 characters in the comments under each photo. 
+R7. Allow characters, special characters, and numbers and emoji in the comments under each photo. 
+
+Write test cases that incorporate equivalence partitioning and boundary value analysis and
+will allow you to verify these requirements.
+
+Part 1: Write requirements for the app that would regulate the minimum and maximum size of
+photos the users can upload to the system.
+
+High-level Test Cases listed out in a table for requirements R1 - R4.
+Test Case #
+Image file type
+Color depth
+Aspect ratio
+Dimension (h x w)
+File size (MB) / goal
+Result
+1
+.png
+1-bit
+1:1
+1x1
+ 0
+Fail
+2
+.jpeg
+8-bit
+3:2
+120x80
+1
+Pass
+3
+.gif
+1-bit
+4:3
+120x160
+2
+Pass
+4
+.png
+24-bit
+5:4
+300x240
+211
+Pass
+5
+.jpeg
+8-bit
+5:4
+715x572
+399
+Pass
+6
+.gif
+24-bit
+4:3
+427x320
+400
+Pass
+7
+.png
+1-bit
+4:3
+2093x1570
+ 401
+Fail
+8
+.tif
+8-bit
+3:2
+780x520
+396
+Fail
+9
+.svg
+24-bit
+1:1
+360x360
+380
+Fail
+
+
+High-level Test Cases, since this is during the requirement phase:
+
+Test Case 1
+High-level 
+A .png image with a 1-bit color depth and aspect ratio of 1:1 having dimensions of 1x1 and file size of 0 MB uploads into the mobile app. Expected result: Fail
+
+Low-level
+Title: Image file with a 1-bit color depth and aspect ratio of 1:1 having dimensions of 1x1.
+Description: Upload a .png image file with a 1-bit color depth and aspect ratio of 1:1 having dimensions of 1x1 and file size of 0 MB uploads into the mobile app
+Steps to reproduce: 
+1. Click on the Select image button
+1. Functionality to search for file on computer pops up
+2. Select file to upload
+2. File is selected
+3. Click on the Upload button
+3. Upload process starts
+4. Upload confirmation is denied
+4. Upload is incomplete with error that image file size is 0
+
+
+Test Case 2
+High-level: 
+A .jpeg image with an 8-bit color depth and aspect ratio of 3:2 having dimensions of 120x80 and file size of 1 MB uploads into the mobile app. Expected result: Pass
+
+Low-level
+Title: Image file with a 8-bit color depth and aspect ratio of 3:2 having dimensions of 120x80.
+Description: Upload a .png image file with a 8-bit color depth and aspect ratio of 3:2 having dimensions of 120x80 and file size of 1 MB uploads into the mobile app
+Steps to reproduce: 
+1. Click on the Select image button
+1. Functionality to search for file on computer pops up
+2. Select file to upload
+2. File is selected
+3. Click on the Upload button
+3. Upload process starts
+4. Upload confirmation is received
+4. Upload is completed
+
+
+
+Test Case 3
+High-level
+A .gif image with a 1-bit color depth and aspect ratio of 4:3 having dimensions of 120x160 and file size of 2 MB uploads into the mobile app. Expected result: Pass
+
+Low-level
+Title: Image file with a 1-bit color depth and aspect ratio of 4:3 having dimensions of 120x160.
+Description: Upload a .png image file with a 1-bit color depth and aspect ratio of 4:3 having dimensions of 120x160 and file size of 2 MB uploads into the mobile app
+Steps to reproduce: 
+1. Click on the Select image button
+1. Functionality to search for file on computer pops up
+2. Select file to upload
+2. File is selected
+3. Click on the Upload button
+3. Upload process starts
+4. Upload confirmation is received
+4. Upload is completed
+
+
+Test Case 4
+High-level
+A .png image with a 24-bit color depth and aspect ratio of 5:4 having dimensions of 300x240 and file size of 211 MB uploads into the mobile app. Expected result: Pass
+
+Low-level
+Title: Image file with a 24-bit color depth and aspect ratio of 5:4 having dimensions of 300x240.
+Description: Upload a .png image file with a 24-bit color depth and aspect ratio of 5:4 having dimensions of 300x240 and file size of 211 MB uploads into the mobile app
+Steps to reproduce: 
+1. Click on the Select image button
+1. Functionality to search for file on computer pops up
+2. Select file to upload
+2. File is selected
+3. Click on the Upload button
+3. Upload process starts
+4. Upload confirmation is received
+4. Upload is completed
+
+
+Test Case 5
+High-level 
+A .jpeg image with an 8-bit color depth and aspect ratio of 5:4 having dimensions of 715x572 and file size of 399 MB uploads into the mobile app. Expected result: Pass
+
+Low-level
+Title: Image file with a 8-bit color depth and aspect ratio of 5:4 having dimensions of 715x572.
+Description: Upload a .png image file with a 8-bit color depth and aspect ratio of 5:4 having dimensions of 715x572 and file size of 399 MB uploads into the mobile app
+Steps to reproduce: 
+1. Click on the Select image button
+1. Functionality to search for file on computer pops up
+2. Select file to upload
+2. File is selected
+3. Click on the Upload button
+3. Upload process starts
+4. Upload confirmation is received
+4. Upload is completed
+
+
+Test Case 6
+High-level 
+A .jpeg image with an 8-bit color depth and aspect ratio of 4:4 having dimensions of 427x320 and file size of 400 MB uploads into the mobile app. Expected result: Pass
+
+Low-level
+Title: Image file with a 8-bit color depth and aspect ratio of 4:4 having dimensions of 427x320.
+Description: Upload a .png image file with a 8-bit color depth and aspect ratio of 4:4 having dimensions of 427x320 and file size of 400 MB uploads into the mobile app
+Steps to reproduce: 
+1. Click on the Select image button
+1. Functionality to search for file on computer pops up
+2. Select file to upload
+2. File is selected
+3. Click on the Upload button
+3. Upload process starts
+4. Upload confirmation is received
+4. Upload is completed
+
+
+Test Case 7
+High-level 
+A .png image with a 1-bit color depth and aspect ratio of 4:3 having dimensions of 2093x1570 and file size of 401 MB uploads into the mobile app. Expected result: Pass
+
+Low-level
+Title: Image file with a 1-bit color depth and aspect ratio of 4:3 having dimensions of 2093x1570.
+Description: Upload a .png image file with a 1-bit color depth and aspect ratio of 4:3 having dimensions of 2093x1570 and file size of 401 MB uploads into the mobile app
+Steps to reproduce: 
+1. Click on the Select image button
+1. Functionality to search for file on computer pops up
+2. Select file to upload
+2. File is selected
+3. Click on the Upload button
+3. Upload process starts
+4. Upload confirmation is received
+4. Upload is completed
+
+
+Test Case 8
+High-level 
+A .tif image with an 8-bit color depth and aspect ratio of 3:2 having dimensions of 780x520 and file size of 396 MB uploads into the mobile app. Expected result: Fail
+
+Low-level
+Title: Image .tif file with a 8-bit color depth and aspect ratio of 3:2 having dimensions of 780x520.
+Description: Upload a .png image file with a 8-bit color depth and aspect ratio of 3:2 having dimensions of 780x520 and file size of 396 MB uploads into the mobile app
+Steps to reproduce: 
+1. Click on the Select image button
+1. Functionality to search for file on computer pops up
+2. Select file to upload
+2. File is selected
+3. Click on the Upload button
+3. Upload process starts
+4. Upload confirmation is denied
+4. Upload is incomplete with error “File .tif not allowed”
+
+
+Test Case 9
+High-level 
+An .svg image with a 24-bit color depth and aspect ratio of 1:1 having dimensions of 360x360 and file size of 380 MB uploads into the mobile app. Expected result: Fail
+
+Low-level
+Title: Image .svg file with a 24-bit color depth and aspect ratio of 1:1 having dimensions of 360x360.
+Description: Upload a .png image file with a 24-bit color depth and aspect ratio of 1:1 having dimensions of 360x360 and file size of 396 MB uploads into the mobile app
+Steps to reproduce: 
+1. Click on the Select image button
+1. Functionality to search for file on computer pops up
+2. Select file to upload
+2. File is selected
+3. Click on the Upload button
+3. Upload process starts
+4. Upload confirmation is denied
+4. Upload is incomplete with error “File .svg not allowed”
+
+
+
+Part 2: Also, mention the following parameters: minimum length of comments under photos, maximum length of comments under photos (the more parameters you come up with, the better).
+
+Test Case 10
+High-level 
+At minimum 2 characters are typed into the comments text box under each photo, including letters in either uppercase or lowercase, numbers, special characters, and emoji. Expected result: Pass
+
+Low-level
+Title: Minimum 2 characters in the comments box under photo
+Description: Type at least 2 characters - including uppercase or lowercase letters, numbers, special characters, and emoji - into the comments text box under the uploaded photo.
+Steps to reproduce: 
+1. Click into the comments text box
+1. Blinking cursor, ready for typing
+2. Type 2 characters
+2. Characters get displayed in the text box
+3. Press “Save” button
+3. Typed characters are saved as comments under photo
+
+
+Test Case 11
+High-level 
+At maximum 50 characters are typed into the comments text box under each photo, including letters in either uppercase or lowercase, numbers, special characters, and emoji. Expected result: Pass
+
+Low-level
+Title: Maximum 50 characters in the comments box under photo
+Description: Type 50 characters - including uppercase or lowercase letters, numbers, special characters, and emoji - into the comments text box under the uploaded photo.
+Steps to reproduce: 
+1. Click into the comments text box
+1. Blinking cursor, ready for typing
+2. Type 50 characters
+2. Characters get displayed in the text box
+3. Press “Save” button
+3. Typed characters are saved as comments under photo
+
+
+
+Test Case 12 
+High-level
+One character is typed into a comments text box under a photo. Expected results: Fail
+
+Low-level
+Title: One character in the comments box under photo
+Description: Type at least 2 characters - including uppercase or lowercase letters, numbers, special characters, and emoji - into the comments text box under the uploaded photo.
+Title: 
+Description: 
+Steps to reproduce: 
+1. Click into the comments text box
+1. Blinking cursor, ready for typing
+2. Type 1 character
+2. Characters get displayed in the text box
+3. Press “Save” button
+3. Error message appears, “Must type at least 2 characters.”
+
+
+Test Case 13
+High-level
+Fifty one (51) characters are typed into a comments text box under a photo. Expected results: Fail
+
+Low-level
+Title: 51 characters in the comments box under photo
+Description: Type 51 characters - including uppercase or lowercase letters, numbers, special characters, and emoji - into the comments text box under the uploaded photo.
+Steps to reproduce: 
+1. Click into the comments text box
+1. Blinking cursor, ready for typing
+2. Type 51 characters
+2. Characters get displayed in the text box
+3. Press “Save” button
+3. Error message appears, “Must type less than 51 characters.”
+
+
+Level 3: Excellent job here with the detailed requirements. Very good job also for the test cases but here you should have done it in table format for BVA and EP, like the example tables in class. However, the test scenarios themselves are correct and good that you have practiced creating them without the TestRail account now
+
+
+Hi Daniel, Below is my feedback: 
+
+Level 1: The correct answer for both tasks is D. Very well defended here with examples. 
+
+Level 2: For Task 1: The correct answer here is B. You are correct about the missing scenarios but they can be combined in 2 more scenarios. Task 2: the correct answer is C. Your thoughts here are correct but it turned out because of the specific of the resolution, we have to test each one of them separately, that’s why we need 4 cases. 
+
+Level 3: Excellent job here with the detailed requirements. Very good job also for the test cases but here you should have done it in table format for BVA and EP, like the example tables in class. However, the test scenarios themselves are correct and good that you have practiced creating them without the TestRail account now 😊
